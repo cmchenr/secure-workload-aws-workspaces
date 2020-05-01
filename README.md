@@ -17,21 +17,21 @@ Code from this respository is designed to syncronize AWS WorkSpace context and t
 
 ## Lamda Functions
 There are 2 Lambda Functions
-1. "annotations_lambda/handler.py" - This syncronizes AWS tags and context (including UserName) with Tetration.
-2. "cleanup_lambda/handler.py" - This cleans up Tetration records when a WorkSpace is terminated.
+1. `annotations_lambda/handler.py` - This syncronizes AWS tags and context (including UserName) with Tetration.
+2. `cleanup_lambda/handler.py` - This cleans up Tetration records when a WorkSpace is terminated.
 
 
 ## Environment Variables
 No code modification should be required.  The following environment variables need to be provisioned to run the lambda function.
 
-* ADD_TAGS -- Applicable only for "annotations_lambda".  Set to 'true' if you want tags attached to WorkSpaces to sync as Annotations in Tetration.  This can increase the time it takes the Lambda to run especially if there are a lot of workspaces.  Can be left blank.
-* ATTRIBUTES_LIST -- Required.  These are additional fields to sync as Tetration annotations.  Comma separated format.  Recommended value is "UserName"
-* DELETE_SENSORS -- Applicable only for "cleanup_lambda".  Set to 'true' if you want sensor records to be removed when a WorkSpace is terminated (recommended).
-* TET_URL -- Tetration URL
-* TET_API_KEY -- Tetration API key with User data upload and sensor management capabilities.
-* TET_API_SECRET -- Tetration API secret with User data upload and sensor management capabilities.
-* TET_TENANT -- Tetration Root Scope/Tenant name.
-* AWS_REGION -- Example "us-east-1"
+* `ADD_TAGS` -- Applicable only for "annotations_lambda".  Set to 'true' if you want tags attached to WorkSpaces to sync as Annotations in Tetration.  This can increase the time it takes the Lambda to run especially if there are a lot of workspaces.  Can be left blank.
+* `ATTRIBUTES_LIST` -- Required.  These are additional fields to sync as Tetration annotations.  Comma separated format.  Recommended value is "UserName"
+* `DELETE_SENSORS` -- Applicable only for "cleanup_lambda".  Set to 'true' if you want sensor records to be removed when a WorkSpace is terminated (recommended).
+* `TET_URL` -- Tetration URL
+* `TET_API_KEY` -- Tetration API key with User data upload and sensor management capabilities.
+* `TET_API_SECRET` -- Tetration API secret with User data upload and sensor management capabilities.
+* `TET_TENANT` -- Tetration Root Scope/Tenant name.
+* `AWS_REGION` -- Example "us-east-1"
 
 
 ## Preparing a package and deploying to Lambda
