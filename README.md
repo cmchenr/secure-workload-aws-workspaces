@@ -7,6 +7,7 @@ VDI is becoming a more popular way to implement remote access solutions for work
 * Provides dynamic network quarantining based on workspace posture
 * Provides visibility, alerting, and forensic into suspicious process behavior including malicious Tactics, Techniques and Procedures (TTPs) and known malicious process hashes
 * Provides visibility into softare inventory and vulnerability
+
 While these capabilities often support security across all datacenter and cloud workloads, there are some unique considerations when deploying Tetration in VDI.  Such as:
 1.	Installing Agents in a Golden Image: When leveraging Cisco Tetation in a VDI environment, the agent must be installed in a golden image.  Agents must follow specific configuration best practices to support cloning.
 2.	Automatically Adding VDI Instances to the Appropriate Policy Groups: This can be accomplished by getting appropriate context such as "tags and pools" that can then have policy immediately applied.
@@ -53,4 +54,5 @@ cd annotations_lambda
 11. Repeat for the other lambda function.
 
 Final configuration for the Lambda should look like this:
+
 -- Insert Picture Here -- 
