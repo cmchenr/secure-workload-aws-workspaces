@@ -9,7 +9,7 @@ VDI is becoming a more popular way to implement remote access solutions for work
 * Provides visibility into softare inventory and vulnerability
 
 While these capabilities often support security across all datacenter and cloud workloads, there are some unique considerations when deploying Tetration in VDI.  Such as:
-1.	Installing Agents in a Golden Image: When leveraging Cisco Tetation in a VDI environment, the agent must be installed in a golden image.  Agents must follow specific configuration best practices to support cloning.
+1.	Installing Agents in a Golden Image: When leveraging Cisco Tetation in a VDI environment, the agent must be installed in a golden image.  Agents must follow specific configuration best practices to support cloning, and may require additional scheduled tasks due to behaviors like frequent hibernation.
 2.	Automatically Adding VDI Instances to the Appropriate Policy Groups: This can be accomplished by getting appropriate context such as "tags and pools" that can then have policy immediately applied.
 3.	Cleaning Up Stale Agent Records for Non-Persistent VDI: VDI machines are often transient.  Tetration maintains records of prior installations in case a machine is powered off and may be powered on at a later time.  For VDI agent records must cleaned up when a workspace is active or re-provisioned.
 
@@ -56,3 +56,29 @@ cd annotations_lambda
 Final configuration for the Lambda should look like this:
 
 -- Insert Picture Here -- 
+
+## Prepping a Golden Image
+There are three things that need to be done to prep a golden image for cloning with the Tetration agent in-place:
+* Install the Tetration Agent
+* Anonymize the Tetration Agent
+* Create a Scheduled Task to Optimize the Agent for Image Hibernation
+
+### Installing the Tetration Agent
+The agent can be installed as normal.  It is recommended to leverage the PowerShell "Easy Installer".
+
+### Anonymizing the Tetration Agent for Cloning
+Each agent installation has a unique certificate and UUID that is generated on install.  If a golden image were cloned, and passes on its UUID, the clone will fail to register.  Thus, when preparing the image, you must anonymize the install before converting it to a template.
+1. Stop the Tetration Agent Services.  In 3.3 those services are "WinTetEngine" and "WinAgentEngine". Occasionally the sysprep process when an image is being converted to a template could re-generated the UUID.  Thus, inaddition to stopping the services, it is recommended to set the service to "Delayed Start".
+2. Delete The UUID and Certificate Files.  With the default install path, those files are:
+    * C:\Program Files\Cisco Tetration\sensor_uuid
+    * C:\Program Files\Cisco Tetration\cert\client.cert
+    * C:\Program Files\Cisco Tetration\cert\client.key
+
+### Accomidating Image Hibernation
+It's very common in AWS WorkSpaces for an image to go into hibernation.  In order to ensure that the latest policy is applied immediatly when the image resumes, a scheduled task should be created to re-start the agent service and reset the connection as soon as the image wakes up.  The following files provide examples:
+
+* `workspace_scheduled_task/RestartTetrationOnResume.xml` - This is a template for a scheduled task.  Note the following...
+    * The task is scheduled to run as the NT AUTHORITY/SYSTEM user with "Highest Available" priviledges to ensure that it can restart services.
+    * The trigger is against a event log "System" -> "WindowsPowerTroubleshooter" -> "Event ID = 1".  This event occurs anytime the system wakes from sleep.
+    * The action is to leverage powershell.exe to run a powershell script.  This is executed with the following flags so that it is invisibile to the user: `-NoLogo -NonInteractive -WindowStyle Hidden -File "C:\start_enforcement_agent.ps1"`
+* `workspace_scheduled_task/start_enforcement_agent.ps1` - This is the powershell script that is executed.  Note that it loops checking connectivity to "www.tetrationcloud.com" before restarting the services.  For an on-premises deployment, this should be changed to one of the pingable Tetration cluster IP addresses.  The services in the restart script are "WinTetEngine" and "WinAgentEngine".  These are the service names as of Tetration version 3.3, but service names are subject to change with future releases.
