@@ -40,7 +40,7 @@ The scripts are optimized for Python3.  It will also require additional dependen
 1. Clone the git repository
 2. Move to the directory for one of the lambda's.  i.e.
 ```bash
-cd tetration-aws-workspaces
+cd secure-workload-aws-workspaces
 cd labels_lambda
 ```
 3. Install tetpyclient and it's dependencies locally in that folder by typing `pip3 install tetpyclient -t .`.  This will download all of the additional python dependency code required.  Boto3 is included in the AWS Lambda runtime, so it does not need to be installed locally unless the function is being tested locally.
