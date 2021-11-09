@@ -19,5 +19,5 @@ DO
 {
 $Ping = Test-Connection www.tetrationcloud.com -quiet}
 Until ($Ping -contains "True")
-Restart-Service "WindowsAgentEngine"
-Restart-Service "WindowsTetEngine"
+Restart-Service "TetSensor"
+Restart-Service "TetEnforcer"
