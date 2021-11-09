@@ -53,10 +53,6 @@ cd labels_lambda
 10. Ensure that the lambda execution duration is sufficient.  If syncronizing tags, 30 seconds may be required especially for larger numbers of workspaces.  If not syncronizing tags, execution should be under 10 second.
 11. Repeat for the other lambda function.
 
-Final configuration for the Lambda should look like this:
-
--- Insert Picture Here -- 
-
 ## Prepping a Golden Image
 There are three things that need to be done to prep a golden image for cloning with the Cisco Secure Workload agent in-place:
 * Install the Cisco Secure Workload Agent
@@ -75,7 +71,7 @@ C:\Program Files\Cisco Tetration\sensor_uuid
 C:\Program Files\Cisco Tetration\cert\client.cert
 C:\Program Files\Cisco Tetration\cert\client.key
 ```
-### Accomidating Image Hibernation
+### Accomodating Image Hibernation
 It's very common in AWS WorkSpaces for an image to go into hibernation.  In order to ensure that the latest policy is applied immediatly when the image resumes, a scheduled task should be created to re-start the agent service and reset the connection as soon as the image wakes up.  The following files provide examples:
 
 * `workspace_scheduled_task/RestartTetrationOnResume.xml` - This is a template for a scheduled task.  Note the following...
