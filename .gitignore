@@ -1,0 +1,11 @@
+# Build Dir
+lambda-package*
+
+# Test
+env.txt
+
+# VSCode
+.vscode
+
+# Mac
+.DS_Store
