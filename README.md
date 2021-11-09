@@ -1,7 +1,7 @@
 # Securing AWS WorkSpaces with Cisco Secure Workload
 
 ## High-level Use Case
-VDI is becoming a more popular way to implement remote access solutions for workers, and cloud-based Virtual Desktops offer unique advantages in terms of their ability to scale dynamically and on-demand.  For any VDI environment, the ability to implement consistent security is critical.  This includes consistent visiblity into user behavior, and enhanced control around network access.  Cisco Secure Workload provides:
+VDI is a popular way to implement remote access solutions for workers, partners and administrators, and cloud-based Virtual Desktops offer unique advantages in terms of their ability to scale dynamically and on-demand.  For any VDI environment, the ability to implement consistent security is critical.  This includes consistent visiblity into user behavior, and enhanced control around network access.  Cisco Secure Workload provides:
 * Visibility, alerting, and forensics agains all network transactions across all virtual desktops independent of where they live
 * Allows for granular and dynamic network access control with it's distributed MultiCloud firewall
 * Provides dynamic network quarantining based on workspace posture
