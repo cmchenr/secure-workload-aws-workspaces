@@ -28,10 +28,10 @@ No code modification should be required.  The following environment variables ne
 * `ADD_TAGS` -- Applicable only for "labels_lambda".  Set to 'true' if you want tags attached to WorkSpaces to sync as labels in Cisco Secure Workload.  This can increase the time it takes the Lambda to run especially if there are a lot of workspaces.  Can be left blank.
 * `ATTRIBUTES_LIST` -- Required.  These are additional fields to sync as Cisco Secure Workload labels.  Comma separated format.  Recommended value is "UserName"
 * `DELETE_SENSORS` -- Applicable only for "cleanup_lambda".  Set to 'true' if you want sensor records to be removed when a WorkSpace is terminated (recommended).
-* `TET_URL` -- Cisco Secure Workload URL
-* `TET_API_KEY` -- Cisco Secure Workload API key with User data upload and sensor management capabilities.
-* `TET_API_SECRET` -- Cisco Secure Workload API secret with User data upload and sensor management capabilities.
-* `TET_TENANT` -- Cisco Secure Workload Root Scope/Tenant name.
+* `SECURE_WORKLOAD_URL` -- Cisco Secure Workload URL
+* `SECURE_WORKLOAD_API_KEY` -- Cisco Secure Workload API key with User data upload and sensor management capabilities.
+* `SECURE_WORKLOAD_API_SECRET` -- Cisco Secure Workload API secret with User data upload and sensor management capabilities.
+* `SECURE_WORKLOAD_TENANT` -- Cisco Secure Workload Root Scope/Tenant name.
 * `AWS_REGION` -- Example "us-east-1"
 
 

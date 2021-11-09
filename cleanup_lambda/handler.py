@@ -26,10 +26,10 @@ from tempfile import NamedTemporaryFile
 
 attributes = os.getenv('ATTRIBUTES_LIST')
 delete_sensors = os.getenv('DELETE_SENSORS')
-tetration_url = os.getenv('TET_URL')
-tetration_api_key = os.getenv('TET_API_KEY')
-tetration_api_secret = os.getenv('TET_API_SECRET')
-tetration_tenant = os.getenv('TET_TENANT')
+tetration_url = os.getenv('SECURE_WORKLOAD_URL')
+tetration_api_key = os.getenv('SECURE_WORKLOAD_API_KEY')
+tetration_api_secret = os.getenv('SECURE_WORKLOAD_API_SECRET')
+tetration_tenant = os.getenv('SECURE_WORKLOAD_TENANT')
 aws_region = os.getenv('WORKSPACE_REGION')
 
 
