@@ -18,15 +18,15 @@ Code from this respository is designed to syncronize AWS WorkSpace context and t
 
 ## Lamda Functions
 There are 2 Lambda Functions
-1. `annotations_lambda/handler.py` - This syncronizes AWS tags and context (including UserName) with Cisco Secure Workload.
+1. `labels_lambda/handler.py` - This syncronizes AWS tags and context (including UserName) with Cisco Secure Workload.
 2. `cleanup_lambda/handler.py` - This cleans up Cisco Secure Workload records when a WorkSpace is terminated.
 
 
 ## Environment Variables
 No code modification should be required.  The following environment variables need to be provisioned to run the lambda function.
 
-* `ADD_TAGS` -- Applicable only for "annotations_lambda".  Set to 'true' if you want tags attached to WorkSpaces to sync as Annotations in Cisco Secure Workload.  This can increase the time it takes the Lambda to run especially if there are a lot of workspaces.  Can be left blank.
-* `ATTRIBUTES_LIST` -- Required.  These are additional fields to sync as Cisco Secure Workload annotations.  Comma separated format.  Recommended value is "UserName"
+* `ADD_TAGS` -- Applicable only for "labels_lambda".  Set to 'true' if you want tags attached to WorkSpaces to sync as labels in Cisco Secure Workload.  This can increase the time it takes the Lambda to run especially if there are a lot of workspaces.  Can be left blank.
+* `ATTRIBUTES_LIST` -- Required.  These are additional fields to sync as Cisco Secure Workload labels.  Comma separated format.  Recommended value is "UserName"
 * `DELETE_SENSORS` -- Applicable only for "cleanup_lambda".  Set to 'true' if you want sensor records to be removed when a WorkSpace is terminated (recommended).
 * `TET_URL` -- Cisco Secure Workload URL
 * `TET_API_KEY` -- Cisco Secure Workload API key with User data upload and sensor management capabilities.
@@ -41,13 +41,13 @@ The scripts are optimized for Python3.  It will also require additional dependen
 2. Move to the directory for one of the lambda's.  i.e.
 ```bash
 cd tetration-aws-workspaces
-cd annotations_lambda
+cd labels_lambda
 ```
 3. Install tetpyclient and it's dependencies locally in that folder by typing `pip3 install tetpyclient -t .`.  This will download all of the additional python dependency code required.  Boto3 is included in the AWS Lambda runtime, so it does not need to be installed locally unless the function is being tested locally.
-4. Zip the entire annotations_lambda folder.
+4. Zip the entire labels_lambda folder.
 5. Create a Lambda function in the AWS console with the Python 3.x runtime
 6. Upload the ZIP file to the Lambda
-7. Create a recurring event to run the Lambda for syncronization leveraging CloudWatch events.  This is essentially like a cron job.  For the annotations_lambda, it's recommended that it repeats every 2 minutes.  For the cleanup_lambda, every 10 minutes is sufficent.
+7. Create a recurring event to run the Lambda for syncronization leveraging CloudWatch events.  This is essentially like a cron job.  For the labels_lambda, it's recommended that it repeats every 2 minutes.  For the cleanup_lambda, every 10 minutes is sufficent.
 8. Ensure that the lambda function is running with a role that read-only access to Amazon WorkSpaces API.
 9. Ensure that the Environment Variables are set properly in the Lambda configuration.
 10. Ensure that the lambda execution duration is sufficient.  If syncronizing tags, 30 seconds may be required especially for larger numbers of workspaces.  If not syncronizing tags, execution should be under 10 second.
