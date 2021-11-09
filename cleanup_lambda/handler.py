@@ -141,6 +141,7 @@ def delete_terminated_agents(agents_to_delete):
             print(resp.text)
 
 
-lambda_handler(None, None)
+# Testing
+# lambda_handler(None, None)
 # print(json.dumps(get_tetration_tagged_workspaces(),indent=1))
 # print(get_aws_workspaces())

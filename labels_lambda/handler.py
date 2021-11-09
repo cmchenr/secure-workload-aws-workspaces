@@ -88,5 +88,5 @@ def upload_tags(workspaces, action):
                 print("Failed to Upload Annotations")
                 print(resp.text)
 
-
-lambda_handler(None, None)
+#Testing
+#lambda_handler(None, None)
