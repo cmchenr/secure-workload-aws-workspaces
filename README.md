@@ -26,7 +26,7 @@ There are 2 Lambda Functions
 No code modification should be required.  The following environment variables need to be provisioned to run the lambda function.
 
 * `ADD_TAGS` -- Applicable only for "labels_lambda".  Set to 'true' if you want tags attached to WorkSpaces to sync as labels in Cisco Secure Workload.  This can increase the time it takes the Lambda to run especially if there are a lot of workspaces.  Can be left blank.
-* `ATTRIBUTES_LIST` -- Required.  These are additional fields to sync as Cisco Secure Workload labels.  Comma separated format.  Recommended value is "UserName"
+* `ATTRIBUTES_LIST` -- Required.  These are additional fields to sync as Cisco Secure Workload labels.  Comma separated format.  Recommended value is "UserName".  A full list of default attributes (not tags) can be found here: https://docs.aws.amazon.com/workspaces/latest/api/API_Workspace.html
 * `DELETE_SENSORS` -- Applicable only for "cleanup_lambda".  Set to 'true' if you want sensor records to be removed when a WorkSpace is terminated (recommended).
 * `SECURE_WORKLOAD_URL` -- Cisco Secure Workload URL
 * `SECURE_WORKLOAD_API_KEY` -- Cisco Secure Workload API key with User data upload and sensor management capabilities.
