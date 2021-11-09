@@ -30,7 +30,7 @@ tetration_url = os.getenv('TET_URL')
 tetration_api_key = os.getenv('TET_API_KEY')
 tetration_api_secret = os.getenv('TET_API_SECRET')
 tetration_tenant = os.getenv('TET_TENANT')
-aws_region = os.getenv('AWS_REGION')
+aws_region = os.getenv('WORKSPACE_REGION')
 fields = {'IP', 'Cloud Service', 'Cloud', 'Location'}
 
 
